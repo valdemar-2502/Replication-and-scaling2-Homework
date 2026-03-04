@@ -126,7 +126,7 @@
 Таблица "Магазины" маленькая, шардинг не требуется.
 
 ---
-![schema sharding](https://github.com/valdemar-2502/Replication-and-scaling2-Homework/blob/main/sharding_schema/sharding_schema.drawio)
+![schema sharding](https://github.com/valdemar-2502/Replication-and-scaling2-Homework/tree/main/sharding_schema)
 
 ---
 ### Режимы работы серверов:
