@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  shard1-db:
+    image: mysql:8.0
+    container_name: mysql_shard1
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: shard1_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
+    ports:
+      - "3307:3306" # Пробрасываем наружу, чтобы не было конфликта портов
+    volumes:
+      - ./shard1/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - shard1_data:/var/lib/mysql
+
+  shard2-db:
+    image: mysql:8.0
+    container_name: mysql_shard2
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: shard2_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpass
+    ports:
+      - "3308:3306" # Пробрасываем наружу
+    volumes:
+      - ./shard2/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - shard2_data:/var/lib/mysql
+
+volumes:
+  shard1_data:
+  shard2_data:
